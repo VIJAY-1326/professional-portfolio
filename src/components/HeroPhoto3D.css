@@ -1,0 +1,271 @@
+/* =====================================================================
+   HeroPhoto3D — Executive Architectural Developer Showcase
+   Premium Luxury Aesthetic:
+   - Symmetrical, high-status glassmorphism bezel
+   - Deep obsidian shadows & specular light reflections
+   - Natural unclipped portrait framing (ZERO text overlays on the image)
+   - Smooth 3D parallax tilt & studio optical rim light
+   ===================================================================== */
+
+.hero-exec-stage {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+/* 1. Deep Optical Studio Ambient Backlight Aura */
+.hero-exec-ambient-aura {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.16) 0%, rgba(139, 92, 246, 0.12) 45%, transparent 70%);
+  filter: blur(65px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 2. Precision Architectural Corner Reticles (Minimalist & High-Tech) */
+.exec-corner-mark {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+  z-index: 4;
+  opacity: 0.65;
+  transition: opacity 0.3s ease;
+}
+
+.hero-exec-stage:hover .exec-corner-mark {
+  opacity: 1;
+}
+
+.mark-tl {
+  top: -8px;
+  left: 4px;
+  border-top: 1.5px solid #22D3EE;
+  border-left: 1.5px solid #22D3EE;
+}
+
+.mark-tr {
+  top: -8px;
+  right: 4px;
+  border-top: 1.5px solid #8B5CF6;
+  border-right: 1.5px solid #8B5CF6;
+}
+
+.mark-bl {
+  bottom: 26px;
+  left: 4px;
+  border-bottom: 1.5px solid #22D3EE;
+  border-left: 1.5px solid #22D3EE;
+}
+
+.mark-br {
+  bottom: 26px;
+  right: 4px;
+  border-bottom: 1.5px solid #8B5CF6;
+  border-right: 1.5px solid #8B5CF6;
+}
+
+/* 3. The Executive 3D Glass Portrait Showcase */
+.hero-exec-glass-card {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 390px;
+  aspect-ratio: 1 / 1.22;
+  border-radius: 26px;
+  padding: 1.5px;
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.55) 0%, rgba(139, 92, 246, 0.4) 50%, rgba(255, 255, 255, 0.08) 100%);
+  box-shadow: 
+    0 30px 80px -15px rgba(0, 0, 0, 0.95), 
+    0 0 35px rgba(34, 211, 238, 0.12);
+  transition: 
+    transform 0.14s ease-out, 
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+  cursor: pointer;
+}
+
+.hero-exec-glass-card.is-active {
+  box-shadow: 
+    0 38px 90px -15px rgba(0, 0, 0, 0.98), 
+    0 0 50px rgba(34, 211, 238, 0.25);
+}
+
+/* Inner Portrait Bevel */
+.exec-portrait-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #04060A;
+  box-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 0.2);
+}
+
+/* Unclipped High-Definition Portrait */
+.exec-portrait-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 22% 30%;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-exec-glass-card:hover .exec-portrait-image {
+  transform: scale(1.035);
+}
+
+/* Natural Atmospheric Gradient Depth */
+.exec-atmosphere-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(3, 5, 8, 0.55) 0%, transparent 35%);
+  pointer-events: none;
+}
+
+/* Interactive Specular Glare Sheen */
+.exec-specular-glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  mix-blend-mode: overlay;
+  transition: opacity 0.3s ease;
+}
+
+/* 4. Minimalist Engineering Status Row */
+.hero-exec-status-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 1.15rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  color: #64748B;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.status-dot-pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 8px #10B981;
+  animation: pulseDot 2s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.75); }
+}
+
+.status-label-code {
+  color: #94A3B8;
+  font-weight: 600;
+}
+
+/* =====================================================================
+   RESPONSIVE MEDIA QUERIES (TABLET & MOBILE)
+   ===================================================================== */
+
+/* 1. Tablet View (<= 1024px) */
+@media (max-width: 1024px) {
+  .hero-exec-stage {
+    max-width: 380px;
+    margin-top: 1rem;
+  }
+
+  .hero-exec-glass-card {
+    max-width: 350px;
+    border-radius: 24px;
+  }
+
+  .exec-portrait-frame {
+    border-radius: 22px;
+  }
+}
+
+/* 2. Mobile View (<= 768px) */
+@media (max-width: 768px) {
+  .hero-exec-stage {
+    max-width: 310px;
+  }
+
+  .hero-exec-ambient-aura {
+    width: 340px;
+    height: 340px;
+  }
+
+  .hero-exec-glass-card {
+    max-width: 285px;
+    border-radius: 20px;
+  }
+
+  .exec-portrait-frame {
+    border-radius: 18px;
+  }
+
+  .hero-exec-status-row {
+    font-size: 0.64rem;
+  }
+}
+
+/* 3. Compact Mobile (<= 480px) */
+@media (max-width: 480px) {
+  .hero-exec-stage {
+    max-width: 275px;
+  }
+
+  .hero-exec-glass-card {
+    max-width: 255px;
+    border-radius: 18px;
+  }
+
+  .exec-portrait-frame {
+    border-radius: 16px;
+  }
+}
+
+/* =====================================================================
+   Light Theme Overrides
+   ===================================================================== */
+:root[data-theme='light'] .hero-exec-glass-card {
+  background: linear-gradient(135deg, rgba(2, 132, 199, 0.6) 0%, rgba(124, 58, 237, 0.4) 50%, rgba(15, 23, 42, 0.08) 100%);
+  box-shadow: 
+    0 20px 50px -10px rgba(15, 23, 42, 0.14), 
+    0 0 35px rgba(2, 132, 199, 0.15);
+}
+
+:root[data-theme='light'] .exec-portrait-frame {
+  background: #FFFFFF;
+}
+
+:root[data-theme='light'] .mark-tl,
+:root[data-theme='light'] .mark-bl {
+  border-color: #0284C7;
+}
+
+:root[data-theme='light'] .mark-tr,
+:root[data-theme='light'] .mark-br {
+  border-color: #7C3AED;
+}
+
+:root[data-theme='light'] .status-label-code {
+  color: #475569;
+}

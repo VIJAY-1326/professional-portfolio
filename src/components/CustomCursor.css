@@ -1,0 +1,139 @@
+/* ============================================================
+   SIGNATURE ANIMATED FUTURISTIC CURSOR STYLES
+   ============================================================ */
+
+/* Hide native cursor only on fine-pointer desktop devices when custom cursor is active */
+@media (pointer: fine) and (min-width: 1024px) {
+  body.custom-cursor-enabled,
+  body.custom-cursor-enabled a,
+  body.custom-cursor-enabled button,
+  body.custom-cursor-enabled [role="button"],
+  body.custom-cursor-enabled input[type="submit"],
+  body.custom-cursor-enabled input[type="button"],
+  body.custom-cursor-enabled .clickable {
+    cursor: none !important;
+  }
+}
+
+/* Global root layer for cursor elements */
+.custom-cursor-root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 999999;
+  overflow: hidden;
+}
+
+/* Primary Arrow Pointer Layer */
+.custom-cursor-pointer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 1000000;
+  transform-origin: 3px 3px;
+  will-change: transform;
+  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.75)) drop-shadow(0 0 10px rgba(34, 211, 238, 0.45));
+}
+
+/* Outer Orbital Ring */
+.custom-cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 999998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform, width, height, border-color, box-shadow;
+  border: 1.5px solid rgba(139, 92, 246, 0.45);
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.25), inset 0 0 10px rgba(34, 211, 238, 0.15);
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.04) 0%, rgba(139, 92, 246, 0.02) 60%, transparent 80%);
+}
+
+/* Orbiting satellite spark on the ring */
+.custom-cursor-satellite {
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #22D3EE;
+  box-shadow: 0 0 8px #22D3EE, 0 0 12px #8B5CF6;
+}
+
+/* Click Ripple Wave */
+.custom-cursor-ripple {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 999997;
+  border: 1.5px solid #22D3EE;
+  box-shadow: 0 0 15px #8B5CF6;
+}
+
+/* Particle trail dot */
+.custom-cursor-particle {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 999996;
+  will-change: transform, opacity;
+}
+
+/* Floating "VIEW PROJECT" glass badge */
+.custom-cursor-badge {
+  position: absolute;
+  left: 26px;
+  top: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.22rem 0.65rem;
+  border-radius: 8px;
+  background: rgba(10, 14, 28, 0.92);
+  border: 1px solid rgba(34, 211, 238, 0.55);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8), 0 0 15px rgba(34, 211, 238, 0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #FFFFFF;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.custom-cursor-badge-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #22D3EE;
+  box-shadow: 0 0 6px #22D3EE;
+}
+
+/* Link Direction Icon Badge */
+.custom-cursor-link-badge {
+  position: absolute;
+  left: 24px;
+  top: 10px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(139, 92, 246, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  pointer-events: none;
+}

@@ -1,0 +1,44 @@
+/* =====================================================================
+   CanvasBackground Stylesheet
+   Full-screen responsive canvas with zero horizontal overflow
+   ===================================================================== */
+
+.canvas-background-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.canvas-particle-surface {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  display: block;
+}
+
+/* Subtle Cinematic Radial Vignette (Ensures Maximum Card & Text Legibility) */
+.canvas-cinematic-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: 
+    radial-gradient(ellipse 95% 70% at 50% 50%, transparent 45%, rgba(3, 5, 8, 0.65) 100%),
+    linear-gradient(180deg, rgba(3, 5, 8, 0.25) 0%, transparent 20%, transparent 80%, rgba(3, 5, 8, 0.55) 100%);
+  opacity: 0.8;
+  transition: opacity 0.4s ease;
+}
+
+:root[data-theme='light'] .canvas-cinematic-vignette {
+  background: 
+    radial-gradient(ellipse 95% 70% at 50% 50%, transparent 45%, rgba(248, 250, 252, 0.45) 100%),
+    linear-gradient(180deg, rgba(248, 250, 252, 0.2) 0%, transparent 20%, transparent 80%, rgba(248, 250, 252, 0.45) 100%);
+  opacity: 0.65;
+}
