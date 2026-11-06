@@ -15,9 +15,9 @@ export default function GithubSection() {
   const [selectedRepo, setSelectedRepo] = useState(VERIFIED_REPOSITORIES[0]);
   const [selectedBranchId, setSelectedBranchId] = useState('react');
   const [statsData, setStatsData] = useState({
-    repos: '24+',
-    commits: '56+',
-    stars: '120+',
+    repos: '7',
+    commits: '50+',
+    stars: '15+',
     contributions: '18+'
   });
 
@@ -33,7 +33,7 @@ export default function GithubSection() {
           if (isMounted) {
             setStatsData(prev => ({
               ...prev,
-              repos: `${userData.public_repos || 24}+`,
+              repos: String(userData.public_repos || 7),
               contributions: `${(userData.followers || 2) * 8 + 2}+`
             }));
           }

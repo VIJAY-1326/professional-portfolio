@@ -34,7 +34,7 @@ export const personalInfo = {
 };
 
 export const stats = [
-  { label: "Public Repositories", value: "5+", description: "Open source code on GitHub" },
+  { label: "Public Repositories", value: "7", description: "Verified code on GitHub" },
   { label: "Practical Projects", value: "4+", description: "Full-stack & responsive web apps" },
   { label: "Hackathons Participated", value: "5+", description: "Collaborative building & ideation" },
   { label: "Technical Presentations", value: "10+", description: "Project showcases & demos" }
@@ -239,7 +239,7 @@ export const educationHistory = [
       "OOP with Java & C++",
       "Computer Networks & Architecture"
     ],
-    highlightNote: "Autonomous Institute • JNTU-GV Affiliated"
+    highlightNote: "Autonomous Institute • JNTU-GV Affiliated • CGPA: 8.75"
   },
   {
     id: "ssc",

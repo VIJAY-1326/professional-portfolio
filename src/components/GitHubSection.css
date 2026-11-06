@@ -1176,8 +1176,10 @@
     height: auto !important;
   }
 
-  /* Hide Desktop 3-Column SVG Tree */
-  .desktop-github-tree-content {
+  /* Hide Desktop 3-Column SVG Tree & Repository Details Card on Mobile */
+  .desktop-github-tree-content,
+  .github-col-details,
+  .mobile-github-details-panel {
     display: none !important;
   }
 
@@ -1403,6 +1405,8 @@
     background: linear-gradient(135deg, rgba(16, 21, 40, 0.8) 0%, rgba(10, 14, 28, 0.88) 100%);
     border: 1.5px solid rgba(255, 255, 255, 0.08);
     cursor: pointer;
+    text-decoration: none !important;
+    color: inherit;
     transition: all 0.22s ease;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);

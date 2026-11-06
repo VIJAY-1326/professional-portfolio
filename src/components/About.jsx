@@ -25,7 +25,7 @@ export default function About({ onOpenResumeModal }) {
   const jsonSpec = {
     engineer: "Malla Vijay Sai",
     role: "Full-Stack Web Developer",
-    academicStatus: "Undergraduate (B.Tech Data Science '28)",
+    academicStatus: "Undergraduate (B.Tech Data Science '28 • CGPA: 8.75)",
     institution: "Aditya Institute of Technology and Management (AITAM)",
     location: "Tekkali, Andhra Pradesh, India",
     coreArchitecture: [
@@ -38,6 +38,11 @@ export default function About({ onOpenResumeModal }) {
       { name: "Restaura", stack: "React, Node.js, Express, MySQL, Docker" },
       { name: "Hostel Outpass", stack: "Full-Stack Web Automation & Permissions" }
     ],
+    github: {
+      username: "VIJAY-1326",
+      publicRepositories: 7,
+      profileUrl: "https://github.com/VIJAY-1326"
+    },
     availability: "Immediate consideration for internships & software roles"
   };
 
@@ -236,7 +241,7 @@ export default function About({ onOpenResumeModal }) {
               <div className="telemetry-card-top">
                 <div className="telemetry-badge">
                   <span className="telemetry-dot-pulse" />
-                  <span>VERIFIED TRACK RECORD</span>
+                  <span>TRACK RECORD</span>
                 </div>
                 <span className="telemetry-timestamp">2026 AUDITED</span>
               </div>
@@ -259,7 +264,7 @@ export default function About({ onOpenResumeModal }) {
                     <span className="metric-indicator dot-violet" />
                     <span className="metric-tag">OPEN SOURCE</span>
                   </div>
-                  <div className="metric-hero-val">24+</div>
+                  <div className="metric-hero-val">07</div>
                   <div className="metric-label">GitHub Repositories</div>
                   <div className="metric-caption">Verified public code & commits</div>
                 </div>
@@ -281,9 +286,9 @@ export default function About({ onOpenResumeModal }) {
                     <span className="metric-indicator dot-emerald" />
                     <span className="metric-tag">EXCELLENCE</span>
                   </div>
-                  <div className="metric-hero-val">9.15</div>
+                  <div className="metric-hero-val">8.75</div>
                   <div className="metric-label">Academic CGPA</div>
-                  <div className="metric-caption">B.Tech Data Science honor tier</div>
+                  <div className="metric-caption">B.Tech Data Science (2024–28)</div>
                 </div>
               </div>
 

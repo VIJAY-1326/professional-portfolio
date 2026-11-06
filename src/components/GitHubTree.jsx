@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Github } from './Icons';
-import { FolderGit2, Star, GitFork, Layers } from 'lucide-react';
+import { FolderGit2, Star, GitFork, Layers, ExternalLink } from 'lucide-react';
 import GitHubBranch from './GitHubBranch';
 import RepositoryCard from './RepositoryCard';
 import RepositoryDetails from './RepositoryDetails';
@@ -301,15 +301,15 @@ export default function GitHubTree({
           <div className="root-mini-stats-card">
             <div className="mini-stat-row text-cyan">
               <FolderGit2 size={13} />
-              <span>24+ Repositories</span>
+              <span>7 Repositories</span>
             </div>
             <div className="mini-stat-row text-amber">
               <Star size={13} />
-              <span>120+ Stars</span>
+              <span>15+ Stars</span>
             </div>
             <div className="mini-stat-row text-violet">
               <GitFork size={13} />
-              <span>12+ Forks</span>
+              <span>8+ Forks</span>
             </div>
             <div className="mini-stat-row text-emerald">
               <Layers size={13} />
@@ -398,8 +398,8 @@ export default function GitHubTree({
           </div>
 
           <div className="mobile-author-stats">
-            <span className="mobile-stat-chip text-cyan">24+ Repos</span>
-            <span className="mobile-stat-chip text-amber">120+ Stars</span>
+            <span className="mobile-stat-chip text-cyan">7 Repos</span>
+            <span className="mobile-stat-chip text-amber">15+ Stars</span>
           </div>
         </div>
 
@@ -448,20 +448,22 @@ export default function GitHubTree({
 
           <div className="mobile-repos-cards-grid">
             {currentActiveRepos.map((repo) => {
-              const isSelected = selectedRepo?.name === repo.name;
+              const repoUrl = repo.html_url || `https://github.com/${GITHUB_USERNAME}/${repo.name}`;
               return (
-                <div
+                <a
                   key={repo.name}
-                  className={`mobile-repo-card-box ${isSelected ? 'is-selected' : ''}`}
+                  href={repoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mobile-repo-card-box"
                   style={{
-                    borderColor: isSelected ? (currentActiveBranch?.accentColor || '#0284C7') : undefined,
-                    boxShadow: isSelected ? `0 0 20px -3px ${currentActiveBranch?.accentColor || '#0284C7'}44` : undefined
+                    textDecoration: 'none'
                   }}
-                  onClick={() => onSelectRepo(repo)}
+                  title={`View ${repo.name} on GitHub`}
                 >
                   <div className="mobile-repo-card-top">
                     <div className="mobile-repo-title-wrap">
-                      <Github size={15} style={{ color: currentActiveBranch?.accentColor || '#22D3EE' }} />
+                      <Github size={15} style={{ color: currentActiveBranch?.accentColor || '#0284C7' }} />
                       <h4 className="mobile-repo-name">{repo.name}</h4>
                     </div>
                     <span className="mobile-repo-visibility-pill">
@@ -476,7 +478,7 @@ export default function GitHubTree({
                   <div className="mobile-repo-card-bottom">
                     <div className="mobile-repo-tags">
                       <span className="mobile-repo-lang">
-                        <span className="lang-color-dot" style={{ backgroundColor: currentActiveBranch?.accentColor || '#22D3EE' }} />
+                        <span className="lang-color-dot" style={{ backgroundColor: currentActiveBranch?.accentColor || '#0284C7' }} />
                         {repo.language || 'Code'}
                       </span>
                       <span className="mobile-repo-metric">
@@ -489,19 +491,23 @@ export default function GitHubTree({
                       </span>
                     </div>
 
-                    <span className="mobile-repo-view-prompt" style={{ color: isSelected ? (currentActiveBranch?.accentColor || '#22D3EE') : '#64748B' }}>
-                      {isSelected ? 'Selected' : 'Inspect'}
+                    <span 
+                      className="mobile-repo-view-prompt" 
+                      style={{ 
+                        color: currentActiveBranch?.accentColor || '#0284C7',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '4px'
+                      }}
+                    >
+                      <span>Open</span>
+                      <ExternalLink size={12} />
                     </span>
                   </div>
-                </div>
+                </a>
               );
             })}
           </div>
-        </div>
-
-        {/* 4. Active Repository Full Details Panel */}
-        <div className="mobile-github-details-panel">
-          <RepositoryDetails repo={selectedRepo} />
         </div>
       </div>
     </div>
