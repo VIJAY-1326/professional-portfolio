@@ -1,17 +1,19 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, useMotionValue, useSpring, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { ExternalLink, ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, RotateCw, ExternalLink } from 'lucide-react';
 import './CustomCursor.css';
 
 /**
- * Signature Premium Animated Futuristic Cursor
- * Inspired directly by user reference images:
- * - Cyan-to-Electric-Violet glowing arrow pointer
- * - Luminous center core
- * - Fluid orbital trailing ring with satellite spark
- * - Context-aware interactive states (Button, Link, Project Card, Text, Click)
- * - Lightweight particle trail
- * - Full Dark/Light theme cross-compatibility
+ * Ultra-Modern Kinetic Developer Cursor
+ * Built for Malla Vijay Sai's Portfolio:
+ *  - Precision Luminous Quantum Core (Instant 1:1 Response)
+ *  - Fluid Kinetic Glass Halo with Velocity-Based Directional Stretch
+ *  - Precision Architectural Reticle Corner Ticks (HUD Crosshair Accent)
+ *  - Dynamic Morphing Context States: 'default' | 'button' | 'project' | 'threed' | 'link' | 'text'
+ *  - Subtle Magnetic Target Attraction on Interactive Buttons
+ *  - Tactile Click Shockwave Compression & Laser Ripple Wave
+ *  - Ethereal Neon Starlight Dust Trail
+ *  - Full Dark/Light Theme Cross-Compatibility & Reduced Motion Safety
  */
 export default function CustomCursor() {
   const shouldReduceMotion = useReducedMotion();
@@ -19,29 +21,38 @@ export default function CustomCursor() {
   // Fine pointer & viewport check
   const [isFinePointer, setIsFinePointer] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  const [cursorState, setCursorState] = useState('default'); // 'default' | 'button' | 'link' | 'project' | 'text' | 'disabled'
-  
-  // Click ripple effects array
+  const [cursorState, setCursorState] = useState('default');
+  const [isMouseDown, setIsMouseDown] = useState(false);
+
+  // Click shockwave ripples
   const [ripples, setRipples] = useState([]);
-  // Lightweight particle trail (max 6 particles)
-  const [particles, setParticles] = useState([]);
+  // Ethereal starlight dust particles
+  const [dustParticles, setDustParticles] = useState([]);
 
   // Raw mouse coordinates
   const mouseX = useMotionValue(-100);
   const mouseY = useMotionValue(-100);
 
-  // Magnetic attraction offset
-  const magneticX = useMotionValue(0);
-  const magneticY = useMotionValue(0);
+  // Halo target coordinates with magnetic offset
+  const haloTargetX = useMotionValue(-100);
+  const haloTargetY = useMotionValue(-100);
 
-  // Physics springs for ultra-smooth natural motion
-  // Main Pointer: high responsiveness with slight natural elasticity
-  const springPointerX = useSpring(mouseX, { stiffness: 900, damping: 50, mass: 0.1 });
-  const springPointerY = useSpring(mouseY, { stiffness: 900, damping: 50, mass: 0.1 });
+  // Velocity tracking coordinates
+  const lastPos = useRef({ x: -100, y: -100, time: 0 });
+  const velocityAngle = useMotionValue(0);
+  const velocityStretch = useMotionValue(1);
 
-  // Outer Ring: elegant, fluid trailing physics with gentle follow delay
-  const springRingX = useSpring(mouseX, { stiffness: 240, damping: 24, mass: 0.4 });
-  const springRingY = useSpring(mouseY, { stiffness: 240, damping: 24, mass: 0.4 });
+  // Core Pointer: Ultra-fast precision tracking
+  const springCoreX = useSpring(mouseX, { stiffness: 1200, damping: 55, mass: 0.08 });
+  const springCoreY = useSpring(mouseY, { stiffness: 1200, damping: 55, mass: 0.08 });
+
+  // Trailing Halo: Kinetic fluid lag with luxury damping
+  const springHaloX = useSpring(haloTargetX, { stiffness: 280, damping: 25, mass: 0.35 });
+  const springHaloY = useSpring(haloTargetY, { stiffness: 280, damping: 25, mass: 0.35 });
+
+  // Velocity springs for fluid squash & stretch
+  const springAngle = useSpring(velocityAngle, { stiffness: 350, damping: 30 });
+  const springStretch = useSpring(velocityStretch, { stiffness: 320, damping: 28 });
 
   // Detect fine pointer (desktop with mouse/trackpad)
   useEffect(() => {
@@ -68,101 +79,120 @@ export default function CustomCursor() {
     };
   }, [isFinePointer]);
 
-  // Global mouse move and hover element detection
-  const lastParticleTime = useRef(0);
+  // Global Mouse Movement & Velocity Handling
+  const lastDustTime = useRef(0);
 
   const handleMouseMove = useCallback((e) => {
     const { clientX: x, clientY: y } = e;
+    const now = performance.now();
+
     mouseX.set(x);
     mouseY.set(y);
 
     if (!isVisible) setIsVisible(true);
 
-    // Emit lightweight particle trail (max once every 65ms while moving)
-    const now = performance.now();
-    if (now - lastParticleTime.current > 65) {
-      lastParticleTime.current = now;
-      const newParticle = {
-        id: `${now}-${Math.random()}`,
-        x: x + (Math.random() * 8 - 4),
-        y: y + (Math.random() * 8 - 4),
-        size: Math.random() * 3.5 + 2.5,
-        color: Math.random() > 0.5 ? '#22D3EE' : '#8B5CF6'
-      };
+    // Calculate dynamic velocity & movement angle
+    const dx = x - lastPos.current.x;
+    const dy = y - lastPos.current.y;
+    const speed = Math.sqrt(dx * dx + dy * dy);
 
-      setParticles((prev) => [...prev.slice(-5), newParticle]);
+    if (speed > 2) {
+      const angleRad = Math.atan2(dy, dx);
+      velocityAngle.set(angleRad * (180 / Math.PI));
+      const stretchFactor = 1 + Math.min(0.48, speed / 55);
+      velocityStretch.set(stretchFactor);
+    } else {
+      velocityStretch.set(1);
     }
 
-    // Inspect hovered element to trigger context-aware cursor states
+    lastPos.current = { x, y, time: now };
+
+    // Emit subtle ethereal starlight dust (once every ~55ms while moving)
+    if (now - lastDustTime.current > 55 && speed > 5) {
+      lastDustTime.current = now;
+      const newDust = {
+        id: `${now}-${Math.random()}`,
+        x: x + (Math.random() * 6 - 3),
+        y: y + (Math.random() * 6 - 3),
+        size: Math.random() * 3 + 2,
+        color: Math.random() > 0.5 ? '#22D3EE' : '#8B5CF6'
+      };
+      setDustParticles((prev) => [...prev.slice(-6), newDust]);
+    }
+
+    // Inspect hovered target element for context states
     const target = e.target;
     if (!target) return;
 
-    // Check for special project card state
-    const projectCard = target.closest('[data-cursor="project"], .stacked-project-card, .project-preview-mockup-wrapper');
-    if (projectCard) {
-      setCursorState('project');
-      magneticX.set(0);
-      magneticY.set(0);
+    // 1. 3D WebGL Canvas / 3D Hologram Area
+    const threedCanvas = target.closest('.hero-3d-wrapper, [data-cursor="3d"], canvas');
+    if (threedCanvas) {
+      setCursorState('threed');
+      haloTargetX.set(x);
+      haloTargetY.set(y);
       return;
     }
 
-    // Check for buttons / interactive controls (with subtle magnetic attraction)
-    const buttonElement = target.closest('button, [role="button"], .interactive-btn, .btn-primary, .btn-secondary');
+    // 2. Project Showcase Cards
+    const projectCard = target.closest('[data-cursor="project"], .stacked-project-card, .project-card, .project-preview-mockup-wrapper');
+    if (projectCard) {
+      setCursorState('project');
+      haloTargetX.set(x);
+      haloTargetY.set(y);
+      return;
+    }
+
+    // 3. Interactive Buttons with subtle magnetic attraction
+    const buttonElement = target.closest('button, [role="button"], .interactive-btn, .threed-tab-btn, .dock-btn, .hero-mode-pill');
     if (buttonElement) {
       setCursorState('button');
-      
-      // Calculate gentle magnetic pull towards button center
       const rect = buttonElement.getBoundingClientRect();
       const centerX = rect.left + rect.width / 2;
       const centerY = rect.top + rect.height / 2;
-      const pullX = (centerX - x) * 0.22;
-      const pullY = (centerY - y) * 0.22;
-      magneticX.set(pullX);
-      magneticY.set(pullY);
+      const pullX = (centerX - x) * 0.18;
+      const pullY = (centerY - y) * 0.18;
+      haloTargetX.set(x + pullX);
+      haloTargetY.set(y + pullY);
       return;
     }
 
-    // Check for links
-    const linkElement = target.closest('a, .nav-link, .tab-btn');
+    // 4. Navigation Links
+    const linkElement = target.closest('a, .nav-link, .specs-cta-link');
     if (linkElement) {
       setCursorState('link');
-      magneticX.set(0);
-      magneticY.set(0);
+      haloTargetX.set(x);
+      haloTargetY.set(y);
       return;
     }
 
-    // Check for text selection areas (inputs, textareas, headers, paragraphs)
+    // 5. Text Input Fields
     const textElement = target.closest('input, textarea, [contenteditable="true"]');
     if (textElement) {
       setCursorState('text');
-      magneticX.set(0);
-      magneticY.set(0);
+      haloTargetX.set(x);
+      haloTargetY.set(y);
       return;
     }
 
-    // Check for disabled elements
-    if (target.closest('[disabled], .disabled')) {
-      setCursorState('disabled');
-      magneticX.set(0);
-      magneticY.set(0);
-      return;
-    }
-
-    // Default state
+    // Default State
     setCursorState('default');
-    magneticX.set(0);
-    magneticY.set(0);
-  }, [isVisible, mouseX, mouseY, magneticX, magneticY]);
+    haloTargetX.set(x);
+    haloTargetY.set(y);
+  }, [isVisible, mouseX, mouseY, haloTargetX, haloTargetY, velocityAngle, velocityStretch]);
 
-  // Click ripple handler
+  // Click Shockwave Handler
   const handleMouseDown = useCallback((e) => {
+    setIsMouseDown(true);
     const ripple = {
       id: `${Date.now()}-${Math.random()}`,
       x: e.clientX,
       y: e.clientY
     };
-
     setRipples((prev) => [...prev.slice(-3), ripple]);
+  }, []);
+
+  const handleMouseUp = useCallback(() => {
+    setIsMouseDown(false);
   }, []);
 
   const handleMouseLeaveWindow = useCallback(() => {
@@ -179,16 +209,18 @@ export default function CustomCursor() {
 
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
     window.addEventListener('mousedown', handleMouseDown, { passive: true });
+    window.addEventListener('mouseup', handleMouseUp, { passive: true });
     document.addEventListener('mouseleave', handleMouseLeaveWindow);
     document.addEventListener('mouseenter', handleMouseEnterWindow);
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mousedown', handleMouseDown);
+      window.removeEventListener('mouseup', handleMouseUp);
       document.removeEventListener('mouseleave', handleMouseLeaveWindow);
       document.removeEventListener('mouseenter', handleMouseEnterWindow);
     };
-  }, [isFinePointer, handleMouseMove, handleMouseDown, handleMouseLeaveWindow, handleMouseEnterWindow]);
+  }, [isFinePointer, handleMouseMove, handleMouseDown, handleMouseUp, handleMouseLeaveWindow, handleMouseEnterWindow]);
 
   // Clean up expired ripples
   useEffect(() => {
@@ -199,202 +231,166 @@ export default function CustomCursor() {
     return () => clearTimeout(timer);
   }, [ripples]);
 
-  // Clean up expired particles
+  // Clean up expired dust particles
   useEffect(() => {
-    if (particles.length === 0) return;
+    if (dustParticles.length === 0) return;
     const timer = setTimeout(() => {
-      setParticles((prev) => prev.slice(1));
-    }, 400);
+      setDustParticles((prev) => prev.slice(1));
+    }, 380);
     return () => clearTimeout(timer);
-  }, [particles]);
+  }, [dustParticles]);
 
   if (!isFinePointer) {
     return null;
   }
 
-  // Ring dimension configuration based on cursor state
-  const ringSize = cursorState === 'button' ? 56 : cursorState === 'project' ? 48 : cursorState === 'link' ? 44 : 40;
-  const isTextState = cursorState === 'text';
+  // Halo sizing & state configuration
+  const haloBaseSize = 
+    cursorState === 'threed' ? 56 :
+    cursorState === 'project' ? 52 :
+    cursorState === 'button' ? 48 :
+    cursorState === 'link' ? 44 : 34;
+
+  const isText = cursorState === 'text';
 
   return (
-    <div className="custom-cursor-root" style={{ opacity: isVisible ? 1 : 0, transition: 'opacity 0.25s ease' }}>
+    <div 
+      className="custom-cursor-root" 
+      style={{ opacity: isVisible ? 1 : 0, transition: 'opacity 0.25s ease' }}
+    >
       
       {/* ============================================================
-          1. LIGHTWEIGHT SPARKLE PARTICLE TRAIL (Fades quickly)
+          1. ETHEREAL STARLIGHT DUST TRAIL
          ============================================================ */}
       <AnimatePresence>
-        {particles.map((particle) => (
+        {dustParticles.map((dust) => (
           <motion.div
-            key={particle.id}
-            className="custom-cursor-particle"
-            initial={{ opacity: 0.75, scale: 1, x: particle.x, y: particle.y }}
-            animate={{ opacity: 0, scale: 0.2, y: particle.y - 12 }}
+            key={dust.id}
+            className="custom-cursor-dust"
+            initial={{ opacity: 0.8, scale: 1, x: dust.x, y: dust.y }}
+            animate={{ opacity: 0, scale: 0.25, y: dust.y - 10 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.45, ease: 'easeOut' }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
             style={{
-              width: particle.size,
-              height: particle.size,
-              backgroundColor: particle.color,
-              boxShadow: `0 0 6px ${particle.color}`
+              width: dust.size,
+              height: dust.size,
+              backgroundColor: dust.color,
+              boxShadow: `0 0 8px ${dust.color}`
             }}
           />
         ))}
       </AnimatePresence>
 
       {/* ============================================================
-          2. CLICK RIPPLE WAVES
+          2. LASER SHOCKWAVE WAVES (On Click)
          ============================================================ */}
       <AnimatePresence>
-        {ripples.map((ripple) => (
+        {ripples.map((rip) => (
           <motion.div
-            key={ripple.id}
-            className="custom-cursor-ripple"
+            key={rip.id}
+            className="custom-cursor-shockwave"
             initial={{ 
-              width: 14, 
-              height: 14, 
-              x: ripple.x - 7, 
-              y: ripple.y - 7, 
-              opacity: 0.9, 
-              scale: 0.6 
+              width: 12, 
+              height: 12, 
+              x: rip.x - 6, 
+              y: rip.y - 6, 
+              opacity: 0.95, 
+              scale: 0.5 
             }}
             animate={{ 
-              width: 65, 
-              height: 65, 
-              x: ripple.x - 32.5, 
-              y: ripple.y - 32.5, 
+              width: 68, 
+              height: 68, 
+              x: rip.x - 34, 
+              y: rip.y - 34, 
               opacity: 0, 
-              scale: 2.2 
+              scale: 2.1 
             }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.45, ease: 'easeOut' }}
+            transition={{ duration: 0.42, ease: 'easeOut' }}
           />
         ))}
       </AnimatePresence>
 
       {/* ============================================================
-          3. OUTER ORBITAL SPRING RING WITH SATELLITE SPARK
+          3. TRAILING KINETIC GLASS HALO (With Velocity Stretch & Reticles)
          ============================================================ */}
-      {!isTextState && (
+      {!isText && (
         <motion.div
-          className="custom-cursor-ring"
+          className={`custom-cursor-halo state-${cursorState}`}
           style={{
-            x: springRingX,
-            y: springRingY,
-            translateX: -ringSize / 2,
-            translateY: -ringSize / 2,
-            width: ringSize,
-            height: ringSize,
-            borderColor: cursorState === 'button' ? '#22D3EE' : cursorState === 'project' ? '#8B5CF6' : 'rgba(139, 92, 246, 0.45)'
-          }}
-          animate={{
-            rotate: 360
-          }}
-          transition={{
-            rotate: { duration: 9, repeat: Infinity, ease: 'linear' }
+            x: springHaloX,
+            y: springHaloY,
+            width: haloBaseSize,
+            height: haloBaseSize,
+            scale: isMouseDown ? 0.76 : 1,
+            rotate: cursorState === 'default' ? springAngle : 0,
+            scaleX: cursorState === 'default' ? springStretch : 1
           }}
         >
-          {/* Orbiting Satellite Dot */}
-          <div className="custom-cursor-satellite" />
+          {/* Architectural HUD Reticle Ticks */}
+          <div className="halo-reticle-tick tick-t" />
+          <div className="halo-reticle-tick tick-b" />
+          <div className="halo-reticle-tick tick-l" />
+          <div className="halo-reticle-tick tick-r" />
 
-          {/* Special State Badges inside or attached to Ring */}
-          {cursorState === 'link' && (
-            <div className="custom-cursor-link-badge">
-              <ArrowUpRight size={13} strokeWidth={2.5} />
-            </div>
-          )}
+          {/* Context Pill Badges */}
+          <AnimatePresence>
+            {cursorState === 'project' && (
+              <motion.div
+                className="cursor-pill-badge"
+                initial={{ opacity: 0, scale: 0.85, y: -4 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.85, y: -4 }}
+                transition={{ duration: 0.18 }}
+              >
+                <ArrowUpRight size={12} className="badge-icon" />
+                <span>EXPLORE</span>
+              </motion.div>
+            )}
+
+            {cursorState === 'threed' && (
+              <motion.div
+                className="cursor-pill-badge"
+                initial={{ opacity: 0, scale: 0.85, y: -4 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.85, y: -4 }}
+                transition={{ duration: 0.18 }}
+              >
+                <RotateCw size={11} className="badge-icon" />
+                <span>DRAG 360°</span>
+              </motion.div>
+            )}
+
+            {cursorState === 'link' && (
+              <motion.div
+                className="cursor-pill-badge"
+                initial={{ opacity: 0, scale: 0.85, y: -4 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.85, y: -4 }}
+                transition={{ duration: 0.18 }}
+              >
+                <ExternalLink size={11} className="badge-icon" />
+                <span>OPEN</span>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.div>
       )}
 
       {/* ============================================================
-          4. MAIN POINTER ARROW (Signature Cyan-Violet Neon Vector)
-             Matches exact visual reference from media_1792662268123_995731b9.png
+          4. CENTRAL PRECISION CORE (1:1 Instant Tracking)
          ============================================================ */}
       <motion.div
-        className="custom-cursor-pointer"
+        className="custom-cursor-core"
         style={{
-          x: springPointerX,
-          y: springPointerY
+          x: springCoreX,
+          y: springCoreY
         }}
       >
-        {isTextState ? (
-          // Text Mode: Minimal glowing vertical I-beam indicator
-          <motion.div
-            initial={{ scaleY: 0 }}
-            animate={{ scaleY: 1 }}
-            exit={{ scaleY: 0 }}
-            style={{
-              width: '2.5px',
-              height: '22px',
-              background: 'linear-gradient(180deg, #22D3EE 0%, #8B5CF6 100%)',
-              borderRadius: '2px',
-              boxShadow: '0 0 8px #22D3EE'
-            }}
-          />
+        {isText ? (
+          <div className="core-text-caret" />
         ) : (
-          // Standard / Interactive Mode: Futuristic Glowing Arrow Pointer
-          <motion.div
-            animate={{
-              scale: cursorState === 'button' ? 1.15 : cursorState === 'project' ? 1.05 : 1,
-              rotate: cursorState === 'button' ? -8 : 0
-            }}
-            transition={{ type: 'spring', stiffness: 500, damping: 28 }}
-            style={{ position: 'relative' }}
-          >
-            <svg 
-              width="28" 
-              height="28" 
-              viewBox="0 0 28 28" 
-              fill="none" 
-              xmlns="http://www.w3.org/2000/svg"
-              style={{ display: 'block', overflow: 'visible' }}
-            >
-              <defs>
-                {/* Cyan to Electric Violet & Magenta Gradient */}
-                <linearGradient id="cursorNeonGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#22D3EE" />
-                  <stop offset="55%" stopColor="#8B5CF6" />
-                  <stop offset="100%" stopColor="#D946EF" />
-                </linearGradient>
-
-                {/* Layered Neon Glow Filter */}
-                <filter id="cursorNeonFilter" x="-40%" y="-40%" width="180%" height="180%">
-                  <feDropShadow dx="0" dy="0" stdDeviation="2" floodColor="#22D3EE" floodOpacity="0.85" />
-                  <feDropShadow dx="0" dy="0" stdDeviation="4.5" floodColor="#8B5CF6" floodOpacity="0.65" />
-                </filter>
-              </defs>
-
-              {/* Futuristic Arrow Path (Matching Reference Image) */}
-              <path
-                d="M3.5 3.5 L10.8 24.5 L14.5 16.5 L22.8 14.8 L3.5 3.5 Z"
-                fill="rgba(10, 14, 28, 0.88)"
-                stroke="url(#cursorNeonGradient)"
-                strokeWidth="1.8"
-                strokeLinejoin="round"
-                strokeLinecap="round"
-                filter="url(#cursorNeonFilter)"
-              />
-
-              {/* Luminous Core Dot */}
-              <circle cx="11" cy="11" r="1.6" fill="#FFFFFF" />
-              <circle cx="11" cy="11" r="3" fill="#22D3EE" opacity="0.6" />
-            </svg>
-
-            {/* Context Badge: "VIEW PROJECT" on project card hover */}
-            <AnimatePresence>
-              {cursorState === 'project' && (
-                <motion.div
-                  className="custom-cursor-badge"
-                  initial={{ opacity: 0, scale: 0.85, x: -8 }}
-                  animate={{ opacity: 1, scale: 1, x: 0 }}
-                  exit={{ opacity: 0, scale: 0.85, x: -8 }}
-                  transition={{ duration: 0.2, ease: 'easeOut' }}
-                >
-                  <span className="custom-cursor-badge-dot" />
-                  <span>VIEW PROJECT</span>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
+          <div className={`core-dot ${cursorState === 'button' ? 'is-active-btn' : ''}`} />
         )}
       </motion.div>
 

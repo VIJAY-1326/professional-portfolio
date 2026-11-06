@@ -1,8 +1,16 @@
-/* ============================================================
-   SIGNATURE ANIMATED FUTURISTIC CURSOR STYLES
-   ============================================================ */
+/* =====================================================================
+   CustomCursor.css — Ultra-Modern Luxury Kinetic Developer Cursor
+   Features:
+   - High-Precision Luminous Quantum Core Dot
+   - Fluid Kinetic Trailing Glass Halo with Velocity Stretch
+   - Precision Architectural Reticle Corner Ticks
+   - Magnetic Target Snapping for Buttons & Links
+   - Adaptive Context Badges: 'VIEW PROJECT', '360° ORBIT', 'LINK'
+   - Laser Shockwave Ripple on Click
+   - Clean Cross-Browser & Dark/Light Theme Compatibility
+   ===================================================================== */
 
-/* Hide native cursor only on fine-pointer desktop devices when custom cursor is active */
+/* Hide native cursor strictly on desktop pointer devices */
 @media (pointer: fine) and (min-width: 1024px) {
   body.custom-cursor-enabled,
   body.custom-cursor-enabled a,
@@ -10,12 +18,13 @@
   body.custom-cursor-enabled [role="button"],
   body.custom-cursor-enabled input[type="submit"],
   body.custom-cursor-enabled input[type="button"],
-  body.custom-cursor-enabled .clickable {
+  body.custom-cursor-enabled .clickable,
+  body.custom-cursor-enabled canvas {
     cursor: none !important;
   }
 }
 
-/* Global root layer for cursor elements */
+/* Global Fixed Root Layer */
 .custom-cursor-root {
   position: fixed;
   top: 0;
@@ -23,117 +32,209 @@
   width: 100vw;
   height: 100vh;
   pointer-events: none;
-  z-index: 999999;
+  z-index: 9999999;
   overflow: hidden;
 }
 
-/* Primary Arrow Pointer Layer */
-.custom-cursor-pointer {
+/* ---------------------------------------------------------------------
+   1. Central Precision Core Dot Layer (Instant 1:1 Response)
+   --------------------------------------------------------------------- */
+.custom-cursor-core {
   position: fixed;
   top: 0;
   left: 0;
   pointer-events: none;
-  z-index: 1000000;
-  transform-origin: 3px 3px;
-  will-change: transform;
-  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.75)) drop-shadow(0 0 10px rgba(34, 211, 238, 0.45));
-}
-
-/* Outer Orbital Ring */
-.custom-cursor-ring {
-  position: fixed;
-  top: 0;
-  left: 0;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 999998;
+  z-index: 10000001;
+  transform: translate(-50%, -50%);
   display: flex;
   align-items: center;
   justify-content: center;
-  will-change: transform, width, height, border-color, box-shadow;
-  border: 1.5px solid rgba(139, 92, 246, 0.45);
-  box-shadow: 0 0 15px rgba(139, 92, 246, 0.25), inset 0 0 10px rgba(34, 211, 238, 0.15);
-  background: radial-gradient(circle, rgba(34, 211, 238, 0.04) 0%, rgba(139, 92, 246, 0.02) 60%, transparent 80%);
+  will-change: transform;
 }
 
-/* Orbiting satellite spark on the ring */
-.custom-cursor-satellite {
-  position: absolute;
-  top: -3px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 5px;
-  height: 5px;
+/* Luminous Core Dot */
+.core-dot {
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
+  background: #FFFFFF;
+  box-shadow: 
+    0 0 8px rgba(34, 211, 238, 0.9), 
+    0 0 16px rgba(139, 92, 246, 0.75),
+    0 0 2px #FFFFFF;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease;
+}
+
+:root[data-theme='light'] .core-dot {
+  background: #0F172A;
+  box-shadow: 
+    0 0 8px rgba(2, 132, 199, 0.8),
+    0 0 14px rgba(124, 58, 237, 0.5);
+}
+
+.core-dot.is-active-btn {
+  transform: scale(0.65);
   background: #22D3EE;
-  box-shadow: 0 0 8px #22D3EE, 0 0 12px #8B5CF6;
+  box-shadow: 0 0 12px #22D3EE, 0 0 20px #8B5CF6;
 }
 
-/* Click Ripple Wave */
-.custom-cursor-ripple {
+/* Text Mode Glowing Laser Caret */
+.core-text-caret {
+  width: 2.5px;
+  height: 24px;
+  background: linear-gradient(180deg, #22D3EE 0%, #8B5CF6 100%);
+  border-radius: 9999px;
+  box-shadow: 0 0 10px #22D3EE, 0 0 18px rgba(139, 92, 246, 0.6);
+  animation: cursorCaretPulse 1s infinite alternate ease-in-out;
+}
+
+@keyframes cursorCaretPulse {
+  0% { opacity: 0.7; transform: scaleY(0.92); }
+  100% { opacity: 1; transform: scaleY(1.08); }
+}
+
+/* ---------------------------------------------------------------------
+   2. Trailing Kinetic Glass Halo (Fluid Spring with Velocity Physics)
+   --------------------------------------------------------------------- */
+.custom-cursor-halo {
   position: fixed;
-  border-radius: 50%;
+  top: 0;
+  left: 0;
   pointer-events: none;
-  z-index: 999997;
-  border: 1.5px solid #22D3EE;
-  box-shadow: 0 0 15px #8B5CF6;
+  z-index: 10000000;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  will-change: transform, width, height, border-color, box-shadow;
+  border: 1.5px solid rgba(34, 211, 238, 0.5);
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.08) 0%, rgba(139, 92, 246, 0.04) 55%, transparent 80%);
+  box-shadow: 
+    0 0 20px rgba(34, 211, 238, 0.22), 
+    inset 0 0 12px rgba(139, 92, 246, 0.15);
+  backdrop-filter: blur(1.5px);
+  -webkit-backdrop-filter: blur(1.5px);
+  transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
 }
 
-/* Particle trail dot */
-.custom-cursor-particle {
-  position: fixed;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 999996;
-  will-change: transform, opacity;
+:root[data-theme='light'] .custom-cursor-halo {
+  border-color: rgba(2, 132, 199, 0.45);
+  background: radial-gradient(circle, rgba(2, 132, 199, 0.08) 0%, rgba(124, 58, 237, 0.04) 55%, transparent 80%);
+  box-shadow: 0 0 16px rgba(2, 132, 199, 0.2);
 }
 
-/* Floating "VIEW PROJECT" glass badge */
-.custom-cursor-badge {
+/* State-Specific Halo Variations */
+.custom-cursor-halo.state-button {
+  border-color: #22D3EE;
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.16) 0%, rgba(139, 92, 246, 0.08) 60%, transparent 85%);
+  box-shadow: 
+    0 0 28px rgba(34, 211, 238, 0.45), 
+    inset 0 0 14px rgba(34, 211, 238, 0.25);
+}
+
+.custom-cursor-halo.state-project {
+  border-color: #8B5CF6;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.2) 0%, rgba(34, 211, 238, 0.08) 60%, transparent 85%);
+  box-shadow: 
+    0 0 30px rgba(139, 92, 246, 0.5), 
+    inset 0 0 15px rgba(139, 92, 246, 0.3);
+}
+
+.custom-cursor-halo.state-threed {
+  border-color: #F59E0B;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.15) 0%, rgba(34, 211, 238, 0.06) 60%, transparent 85%);
+  box-shadow: 0 0 26px rgba(245, 158, 11, 0.4);
+}
+
+/* 4 Precision Architectural Reticle Ticks (HUD Crosshair Accent) */
+.halo-reticle-tick {
   position: absolute;
-  left: 26px;
-  top: 14px;
+  background-color: #22D3EE;
+  box-shadow: 0 0 6px #22D3EE;
+  border-radius: 9999px;
+  pointer-events: none;
+  opacity: 0.8;
+  transition: opacity 0.25s ease, background-color 0.25s ease;
+}
+
+.halo-reticle-tick.tick-t { top: -4px; left: 50%; transform: translateX(-50%); width: 2px; height: 5px; }
+.halo-reticle-tick.tick-b { bottom: -4px; left: 50%; transform: translateX(-50%); width: 2px; height: 5px; }
+.halo-reticle-tick.tick-l { left: -4px; top: 50%; transform: translateY(-50%); width: 5px; height: 2px; }
+.halo-reticle-tick.tick-r { right: -4px; top: 50%; transform: translateY(-50%); width: 5px; height: 2px; }
+
+:root[data-theme='light'] .halo-reticle-tick {
+  background-color: #0284C7;
+  box-shadow: 0 0 6px #0284C7;
+}
+
+/* ---------------------------------------------------------------------
+   3. Adaptive Modern Pill Badges ('VIEW PROJECT', '360° ORBIT', etc.)
+   --------------------------------------------------------------------- */
+.cursor-pill-badge {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  padding: 0.22rem 0.65rem;
-  border-radius: 8px;
-  background: rgba(10, 14, 28, 0.92);
-  border: 1px solid rgba(34, 211, 238, 0.55);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8), 0 0 15px rgba(34, 211, 238, 0.35);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  gap: 0.4rem;
+  padding: 0.28rem 0.75rem;
+  border-radius: 9999px;
+  background: rgba(10, 15, 28, 0.88);
+  border: 1px solid rgba(34, 211, 238, 0.45);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 16px rgba(34, 211, 238, 0.3);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   color: #FFFFFF;
   font-family: var(--font-mono, monospace);
-  font-size: 0.65rem;
-  font-weight: 800;
+  font-size: 0.68rem;
+  font-weight: 700;
   letter-spacing: 0.08em;
   white-space: nowrap;
   pointer-events: none;
 }
 
-.custom-cursor-badge-dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: #22D3EE;
-  box-shadow: 0 0 6px #22D3EE;
+:root[data-theme='light'] .cursor-pill-badge {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(2, 132, 199, 0.4);
+  color: #0F172A;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 0 12px rgba(2, 132, 199, 0.2);
 }
 
-/* Link Direction Icon Badge */
-.custom-cursor-link-badge {
-  position: absolute;
-  left: 24px;
-  top: 10px;
-  width: 22px;
-  height: 22px;
+.cursor-pill-badge .badge-icon {
+  color: #22D3EE;
+  flex-shrink: 0;
+}
+
+:root[data-theme='light'] .cursor-pill-badge .badge-icon {
+  color: #0284C7;
+}
+
+/* ---------------------------------------------------------------------
+   4. Laser Shockwave Ripple Waves (On Mouse Click)
+   --------------------------------------------------------------------- */
+.custom-cursor-shockwave {
+  position: fixed;
   border-radius: 50%;
-  background: rgba(139, 92, 246, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #FFFFFF;
   pointer-events: none;
+  z-index: 9999998;
+  border: 1.5px solid #22D3EE;
+  box-shadow: 0 0 20px #8B5CF6, inset 0 0 10px #22D3EE;
+}
+
+:root[data-theme='light'] .custom-cursor-shockwave {
+  border-color: #0284C7;
+  box-shadow: 0 0 16px #7C3AED;
+}
+
+/* ---------------------------------------------------------------------
+   5. Ethereal Neon Starlight Dust Trail
+   --------------------------------------------------------------------- */
+.custom-cursor-dust {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999997;
+  will-change: transform, opacity;
 }

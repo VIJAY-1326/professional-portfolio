@@ -1,8 +1,9 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { personalInfo } from '../data/portfolioData';
 import { Github, Linkedin } from './Icons';
 import HeroPhoto3D from './HeroPhoto3D';
+import Hero3DCore from './Hero3DCore';
 import './Hero.css';
 import { 
   ArrowRight, 
@@ -13,10 +14,14 @@ import {
   Layers, 
   Database,
   ExternalLink,
-  Code2
+  Code2,
+  User,
+  Box
 } from 'lucide-react';
 
 export default function Hero({ onOpenResumeModal }) {
+  const [visualMode, setVisualMode] = useState('portrait');
+
   const coreTags = [
     { name: 'React', color: '#22D3EE' },
     { name: 'Node.js', color: '#10B981' },
@@ -148,14 +153,64 @@ export default function Hero({ onOpenResumeModal }) {
 
           </motion.div>
 
-          {/* ================= Right: Interactive 3D WebGL Holographic Portal (Zero Text Overlays) ================= */}
+          {/* ================= Right: Interactive 3D WebGL Holographic Portal / Portrait ================= */}
           <motion.div 
             className="hero-visual-column"
             initial={{ opacity: 0, scale: 0.92 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
           >
-            <HeroPhoto3D />
+            {/* Visual View Mode Switcher Pill */}
+            <div className="hero-visual-mode-bar" role="tablist">
+              <button
+                type="button"
+                role="tab"
+                aria-selected={visualMode === 'portrait'}
+                className={`hero-mode-pill ${visualMode === 'portrait' ? 'is-active' : ''}`}
+                onClick={() => setVisualMode('portrait')}
+              >
+                <User size={13} />
+                <span>Portrait</span>
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={visualMode === '3d'}
+                className={`hero-mode-pill ${visualMode === '3d' ? 'is-active' : ''}`}
+                onClick={() => setVisualMode('3d')}
+              >
+                <Box size={13} />
+                <span>3D Hologram</span>
+                <span className="switch-live-dot" />
+              </button>
+            </div>
+
+            {/* Display active visual component */}
+            <AnimatePresence mode="wait">
+              {visualMode === 'portrait' ? (
+                <motion.div
+                  key="portrait"
+                  initial={{ opacity: 0, scale: 0.96 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.96 }}
+                  transition={{ duration: 0.3 }}
+                  style={{ width: '100%' }}
+                >
+                  <HeroPhoto3D />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="3d"
+                  initial={{ opacity: 0, scale: 0.96 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.96 }}
+                  transition={{ duration: 0.3 }}
+                  style={{ width: '100%', maxWidth: '440px', height: '520px', minHeight: '440px' }}
+                >
+                  <Hero3DCore />
+                </motion.div>
+              )}
+            </AnimatePresence>
           </motion.div>
 
         </div>
