@@ -41,7 +41,7 @@ export default function Footer({ onPlayIntro }) {
             flexWrap: 'wrap', 
             gap: '2.5rem',
             paddingBottom: '3.25rem',
-            borderBottom: '1px solid rgba(255, 255, 255, 0.06)'
+            borderBottom: '1px solid var(--border-subtle, rgba(255, 255, 255, 0.06))'
           }}
         >
           {/* Brand */}
@@ -57,17 +57,17 @@ export default function Footer({ onPlayIntro }) {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  color: '#22D3EE'
+                  color: 'var(--accent-cyan, #22D3EE)'
                 }}
               >
                 <Code2 size={20} />
               </div>
-              <span style={{ fontSize: '1.25rem', fontWeight: 800, color: '#F5F7FF' }}>
+              <span style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-primary, #F5F7FF)' }}>
                 {personalInfo.name}
               </span>
             </div>
             
-            <p style={{ fontSize: '0.9rem', color: '#A1A9BD', maxWidth: '440px', lineHeight: 1.6 }}>
+            <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary, #A1A9BD)', maxWidth: '440px', lineHeight: 1.6 }}>
               Full-Stack & Frontend Developer • B.Tech Data Science student at Aditya Institute of Technology and Management (AITAM).
             </p>
           </div>
@@ -85,12 +85,12 @@ export default function Footer({ onPlayIntro }) {
                 width: '42px',
                 height: '42px',
                 borderRadius: '10px',
-                background: 'rgba(255, 255, 255, 0.04)',
-                border: '1px solid rgba(255, 255, 255, 0.09)',
+                background: 'var(--bg-card, rgba(255, 255, 255, 0.04))',
+                border: '1px solid var(--border-subtle, rgba(255, 255, 255, 0.09))',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: '#F5F7FF',
+                color: 'var(--text-primary, #F5F7FF)',
                 textDecoration: 'none'
               }}
             >
@@ -108,12 +108,12 @@ export default function Footer({ onPlayIntro }) {
                 width: '42px',
                 height: '42px',
                 borderRadius: '10px',
-                background: 'rgba(255, 255, 255, 0.04)',
-                border: '1px solid rgba(255, 255, 255, 0.09)',
+                background: 'var(--bg-card, rgba(255, 255, 255, 0.04))',
+                border: '1px solid var(--border-subtle, rgba(255, 255, 255, 0.09))',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: '#F5F7FF',
+                color: 'var(--text-primary, #F5F7FF)',
                 textDecoration: 'none'
               }}
             >
@@ -131,12 +131,12 @@ export default function Footer({ onPlayIntro }) {
                 width: '42px',
                 height: '42px',
                 borderRadius: '10px',
-                background: 'rgba(255, 255, 255, 0.04)',
-                border: '1px solid rgba(255, 255, 255, 0.09)',
+                background: 'var(--bg-card, rgba(255, 255, 255, 0.04))',
+                border: '1px solid var(--border-subtle, rgba(255, 255, 255, 0.09))',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: '#F5F7FF',
+                color: 'var(--text-primary, #F5F7FF)',
                 textDecoration: 'none'
               }}
             >
@@ -152,12 +152,12 @@ export default function Footer({ onPlayIntro }) {
                 width: '42px',
                 height: '42px',
                 borderRadius: '10px',
-                background: 'rgba(255, 255, 255, 0.04)',
-                border: '1px solid rgba(255, 255, 255, 0.09)',
+                background: 'var(--bg-card, rgba(255, 255, 255, 0.04))',
+                border: '1px solid var(--border-subtle, rgba(255, 255, 255, 0.09))',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: '#F5F7FF',
+                color: 'var(--text-primary, #F5F7FF)',
                 textDecoration: 'none'
               }}
             >
@@ -174,12 +174,12 @@ export default function Footer({ onPlayIntro }) {
                 width: '42px',
                 height: '42px',
                 borderRadius: '10px',
-                background: 'rgba(139, 92, 246, 0.12)',
-                border: '1px solid rgba(139, 92, 246, 0.35)',
+                background: 'var(--bg-card, rgba(139, 92, 246, 0.12))',
+                border: '1px solid var(--border-glow, rgba(139, 92, 246, 0.35))',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: '#c4b5fd',
+                color: 'var(--accent-violet, #c4b5fd)',
                 cursor: 'pointer',
                 marginLeft: '0.85rem'
               }}
@@ -200,7 +200,7 @@ export default function Footer({ onPlayIntro }) {
             gap: '1.5rem',
             paddingTop: '2rem',
             fontSize: '0.84rem',
-            color: '#A1A9BD'
+            color: 'var(--text-secondary, #A1A9BD)'
           }}
         >
           <div>
@@ -210,46 +210,44 @@ export default function Footer({ onPlayIntro }) {
           <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
             <a 
               href="#hero" 
-              style={{ color: '#A1A9BD', textDecoration: 'none', transition: 'color 0.2s ease' }}
-              onMouseEnter={(e) => e.target.style.color = '#22D3EE'}
-              onMouseLeave={(e) => e.target.style.color = '#A1A9BD'}
+              style={{ color: 'var(--text-secondary, #A1A9BD)', textDecoration: 'none', transition: 'color 0.2s ease' }}
+              onMouseEnter={(e) => e.target.style.color = 'var(--accent-cyan, #22D3EE)'}
+              onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary, #A1A9BD)'}
             >
               Home
             </a>
             <a 
               href="#projects" 
-              style={{ color: '#A1A9BD', textDecoration: 'none', transition: 'color 0.2s ease' }}
-              onMouseEnter={(e) => e.target.style.color = '#22D3EE'}
-              onMouseLeave={(e) => e.target.style.color = '#A1A9BD'}
+              style={{ color: 'var(--text-secondary, #A1A9BD)', textDecoration: 'none', transition: 'color 0.2s ease' }}
+              onMouseEnter={(e) => e.target.style.color = 'var(--accent-cyan, #22D3EE)'}
+              onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary, #A1A9BD)'}
             >
               Projects
             </a>
             <a 
               href="#skills" 
-              style={{ color: '#A1A9BD', textDecoration: 'none', transition: 'color 0.2s ease' }}
-              onMouseEnter={(e) => e.target.style.color = '#22D3EE'}
-              onMouseLeave={(e) => e.target.style.color = '#A1A9BD'}
+              style={{ color: 'var(--text-secondary, #A1A9BD)', textDecoration: 'none', transition: 'color 0.2s ease' }}
+              onMouseEnter={(e) => e.target.style.color = 'var(--accent-cyan, #22D3EE)'}
+              onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary, #A1A9BD)'}
             >
               Skills
             </a>
             <a 
               href="#education" 
-              style={{ color: '#A1A9BD', textDecoration: 'none', transition: 'color 0.2s ease' }}
-              onMouseEnter={(e) => e.target.style.color = '#22D3EE'}
-              onMouseLeave={(e) => e.target.style.color = '#A1A9BD'}
+              style={{ color: 'var(--text-secondary, #A1A9BD)', textDecoration: 'none', transition: 'color 0.2s ease' }}
+              onMouseEnter={(e) => e.target.style.color = 'var(--accent-cyan, #22D3EE)'}
+              onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary, #A1A9BD)'}
             >
               Education
             </a>
             <a 
               href="#contact" 
-              style={{ color: '#A1A9BD', textDecoration: 'none', transition: 'color 0.2s ease' }}
-              onMouseEnter={(e) => e.target.style.color = '#22D3EE'}
-              onMouseLeave={(e) => e.target.style.color = '#A1A9BD'}
+              style={{ color: 'var(--text-secondary, #A1A9BD)', textDecoration: 'none', transition: 'color 0.2s ease' }}
+              onMouseEnter={(e) => e.target.style.color = 'var(--accent-cyan, #22D3EE)'}
+              onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary, #A1A9BD)'}
             >
               Contact
             </a>
-
-            
           </div>
         </div>
 

@@ -60,21 +60,27 @@
 .theme-light {
   --bg-main: #F8FAFC;
   --bg-secondary: #EDF2F7;
-  --bg-card: rgba(255, 255, 255, 0.60);
-  --bg-card-hover: rgba(255, 255, 255, 0.78);
-  --bg-glass: rgba(255, 255, 255, 0.50);
+  --bg-card: rgba(255, 255, 255, 0.90);
+  --bg-card-hover: rgba(255, 255, 255, 0.98);
+  --bg-glass: rgba(255, 255, 255, 0.85);
 
   --border-subtle: rgba(15, 23, 42, 0.10);
-  --border-glow: rgba(139, 92, 246, 0.35);
-  --border-cyan: rgba(6, 182, 212, 0.35);
+  --border-glow: rgba(124, 58, 237, 0.35);
+  --border-cyan: rgba(2, 132, 199, 0.35);
+
+  --accent-violet: #7C3AED;
+  --accent-cyan: #0284C7;
+  --accent-champagne: #B45309;
+  --accent-emerald: #059669;
+  --accent-amber: #D97706;
 
   --text-primary: #0F172A;
   --text-secondary: #475569;
   --text-muted: #64748B;
   --text-champagne: #B45309;
 
-  --glow-violet: 0 0 35px -5px rgba(139, 92, 246, 0.2);
-  --glow-cyan: 0 0 35px -5px rgba(6, 182, 212, 0.18);
+  --glow-violet: 0 0 35px -5px rgba(124, 58, 237, 0.2);
+  --glow-cyan: 0 0 35px -5px rgba(2, 132, 199, 0.18);
   --glow-card: 0 10px 30px -10px rgba(15, 23, 42, 0.08), 0 0 0 1px rgba(15, 23, 42, 0.06);
 }
 
@@ -1126,17 +1132,40 @@ body.theme-light {
 :root[data-theme='light'] .gradient-text {
   background: linear-gradient(135deg, #0F172A 15%, #334155 55%, #64748B 100%);
   -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+:root[data-theme='light'] .gradient-text-accent {
+  background: linear-gradient(135deg, #7C3AED 0%, #0284C7 50%, #B45309 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+:root[data-theme='light'] .gradient-text-violet {
+  background: linear-gradient(135deg, #7C3AED 0%, #6366F1 50%, #0284C7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+:root[data-theme='light'] .gradient-text-cyan {
+  background: linear-gradient(135deg, #0284C7 0%, #0EA5E9 50%, #6366F1 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 :root[data-theme='light'] .gradient-text-champagne {
   background: linear-gradient(135deg, #78350F 0%, #B45309 60%, #D97706 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 :root[data-theme='light'] .glass-panel {
-  background: rgba(255, 255, 255, 0.60);
+  background: rgba(255, 255, 255, 0.90);
   border: 1px solid rgba(15, 23, 42, 0.08);
   box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.06);
   backdrop-filter: blur(20px);
@@ -1146,10 +1175,10 @@ body.theme-light {
 :root[data-theme='light'] .glass-card,
 :root[data-theme='light'] .card-3d {
   background: 
-    linear-gradient(rgba(255, 255, 255, 0.62), rgba(248, 250, 252, 0.62)) padding-box,
-    linear-gradient(135deg, rgba(139, 92, 246, 0.25), rgba(34, 211, 238, 0.2)) border-box;
+    linear-gradient(rgba(255, 255, 255, 0.94), rgba(248, 250, 252, 0.94)) padding-box,
+    linear-gradient(135deg, rgba(124, 58, 237, 0.22), rgba(2, 132, 199, 0.2)) border-box;
   box-shadow: 
-    inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.8),
+    inset 0 1px 1.5px 0 rgba(255, 255, 255, 1),
     0 10px 25px -8px rgba(15, 23, 42, 0.08), 
     0 0 0 1px rgba(15, 23, 42, 0.05);
   backdrop-filter: blur(20px);
@@ -1159,11 +1188,11 @@ body.theme-light {
 :root[data-theme='light'] .glass-card:hover,
 :root[data-theme='light'] .card-3d:hover {
   background: 
-    linear-gradient(rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.82)) padding-box,
-    linear-gradient(135deg, #8B5CF6 0%, #06B6D4 50%, #E8D5B5 100%) border-box;
+    linear-gradient(#FFFFFF, #FFFFFF) padding-box,
+    linear-gradient(135deg, #7C3AED 0%, #0284C7 50%, #B45309 100%) border-box;
   box-shadow: 
     inset 0 1.5px 2px 0 #FFFFFF,
-    0 0 20px -2px rgba(139, 92, 246, 0.25),
+    0 0 20px -2px rgba(124, 58, 237, 0.25),
     0 15px 35px -8px rgba(15, 23, 42, 0.12);
 }
 
@@ -1256,8 +1285,8 @@ body.theme-light {
 
 :root[data-theme='light'] .stat-card {
   background: 
-    linear-gradient(rgba(255, 255, 255, 0.62), rgba(248, 250, 252, 0.62)) padding-box,
-    linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(34, 211, 238, 0.15)) border-box;
+    linear-gradient(rgba(255, 255, 255, 0.94), rgba(248, 250, 252, 0.94)) padding-box,
+    linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(2, 132, 199, 0.18)) border-box;
   box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -1265,11 +1294,59 @@ body.theme-light {
 
 :root[data-theme='light'] .principle-card {
   background: 
-    linear-gradient(rgba(255, 255, 255, 0.65), rgba(248, 250, 252, 0.65)) padding-box,
-    linear-gradient(135deg, rgba(139, 92, 246, 0.25), rgba(34, 211, 238, 0.2)) border-box;
+    linear-gradient(rgba(255, 255, 255, 0.94), rgba(248, 250, 252, 0.94)) padding-box,
+    linear-gradient(135deg, rgba(124, 58, 237, 0.22), rgba(2, 132, 199, 0.2)) border-box;
   box-shadow: 0 8px 24px -5px rgba(15, 23, 42, 0.08);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+}
+
+:root[data-theme='light'] .skill-card {
+  background: 
+    linear-gradient(rgba(255, 255, 255, 0.94), rgba(248, 250, 252, 0.94)) padding-box,
+    linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(2, 132, 199, 0.18)) border-box;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
+}
+
+:root[data-theme='light'] .skill-card:hover {
+  background: 
+    linear-gradient(#FFFFFF, #FFFFFF) padding-box,
+    linear-gradient(135deg, #7C3AED 0%, #0284C7 50%, #B45309 100%) border-box;
+  box-shadow: 
+    0 10px 25px -5px rgba(15, 23, 42, 0.1),
+    0 0 16px rgba(2, 132, 199, 0.2);
+}
+
+:root[data-theme='light'] .skill-card .skill-name {
+  color: #0F172A;
+}
+
+:root[data-theme='light'] .skill-card:hover .skill-name {
+  color: #0F172A;
+}
+
+:root[data-theme='light'] .skill-card .skill-tag {
+  color: #64748B;
+}
+
+:root[data-theme='light'] .skill-card:hover .skill-tag {
+  color: #0284C7;
+}
+
+:root[data-theme='light'] .contact-channel-card {
+  background: 
+    linear-gradient(rgba(255, 255, 255, 0.94), rgba(248, 250, 252, 0.94)) padding-box,
+    linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(2, 132, 199, 0.18)) border-box;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05);
+}
+
+:root[data-theme='light'] .contact-channel-card:hover {
+  background: 
+    linear-gradient(#FFFFFF, #FFFFFF) padding-box,
+    linear-gradient(135deg, #7C3AED 0%, #0284C7 100%) border-box;
+  box-shadow: 
+    0 12px 30px -6px rgba(15, 23, 42, 0.1),
+    0 0 20px rgba(2, 132, 199, 0.2);
 }
 
 /* =====================================================================

@@ -308,6 +308,7 @@ export default function Skills() {
               <div style={{ flex: 1, overflowY: 'auto' }}>
                 {/* Explorer Section Title */}
                 <div 
+                  className="ide-explorer-title-row"
                   style={{
                     padding: '0.85rem 1.25rem',
                     fontSize: '0.76rem',
@@ -358,6 +359,7 @@ export default function Skills() {
                           <CatIcon size={16} style={{ color: cat.accentColor, flexShrink: 0 }} />
                           <div style={{ minWidth: 0 }}>
                             <div 
+                              className="file-label"
                               style={{ 
                                 fontSize: '0.88rem', 
                                 fontWeight: isActive ? 700 : 600, 
@@ -369,6 +371,7 @@ export default function Skills() {
                               {cat.label}
                             </div>
                             <div 
+                              className="file-name-text"
                               style={{ 
                                 fontSize: '0.72rem', 
                                 fontFamily: 'var(--font-mono, monospace)', 
@@ -384,6 +387,7 @@ export default function Skills() {
                         {/* File Badge Count */}
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
                           <span 
+                            className="file-badge"
                             style={{
                               fontSize: '0.72rem',
                               fontFamily: 'var(--font-mono, monospace)',
@@ -406,6 +410,7 @@ export default function Skills() {
 
               {/* Sidebar Footer: Active File & Loaded Exports Status */}
               <div 
+                className="ide-sidebar-footer"
                 style={{
                   padding: '1.15rem 1.25rem',
                   borderTop: '1px solid rgba(255, 255, 255, 0.06)',
@@ -418,11 +423,11 @@ export default function Skills() {
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.2rem' }}>
                   <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: currentCategory.accentColor, boxShadow: `0 0 8px ${currentCategory.accentColor}` }} />
-                  <span style={{ fontSize: '0.86rem', fontWeight: 700, color: '#F5F7FF' }}>
+                  <span className="footer-title" style={{ fontSize: '0.86rem', fontWeight: 700, color: '#F5F7FF' }}>
                     {currentCategory.label}
                   </span>
                 </div>
-                <div style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono, monospace)', color: '#94A3B8' }}>
+                <div className="footer-filename" style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono, monospace)', color: '#94A3B8' }}>
                   {currentCategory.fileName}
                 </div>
                 <div style={{ fontSize: '0.72rem', color: '#22D3EE', marginTop: '0.35rem', fontFamily: 'var(--font-mono, monospace)' }}>
@@ -476,6 +481,7 @@ export default function Skills() {
                       <button
                         key={cat.id}
                         onClick={() => handleSelectFile(cat.id)}
+                        className={`ide-tab-btn ${isTabActive ? 'active' : ''}`}
                         style={{
                           background: isTabActive ? 'rgba(11, 15, 27, 0.65)' : 'transparent',
                           border: 'none',
@@ -562,6 +568,7 @@ export default function Skills() {
 
                         {/* Thin Connecting Rule Line */}
                         <div 
+                          className="ide-category-rule"
                           style={{
                             flex: 1,
                             height: '1px',
@@ -571,6 +578,7 @@ export default function Skills() {
 
                         {/* Filename Label on far right */}
                         <div 
+                          className="ide-category-filename"
                           style={{
                             fontSize: '0.78rem',
                             fontFamily: 'var(--font-mono, monospace)',
@@ -584,6 +592,7 @@ export default function Skills() {
 
                       {/* Synthetic Syntax Highlighted Import Statement */}
                       <div 
+                        className="ide-code-import-banner"
                         style={{
                           display: 'flex',
                           alignItems: 'center',
@@ -597,6 +606,7 @@ export default function Skills() {
                         }}
                       >
                         <div 
+                          className="code-line"
                           style={{
                             fontFamily: 'var(--font-mono, monospace)',
                             fontSize: '0.86rem',
@@ -606,18 +616,19 @@ export default function Skills() {
                             textOverflow: 'ellipsis'
                           }}
                         >
-                          <span style={{ color: '#818CF8', fontWeight: 600 }}>import </span>
+                          <span className="kw-import" style={{ color: '#818CF8', fontWeight: 600 }}>import </span>
                           <span style={{ color: cat.accentColor }}>
                             &#123; {cat.skills.map(s => s.name.replace(/\+\+/g, '_PlusPlus').replace(/[^a-zA-Z0-9]/g, '_')).join(', ')} &#125;
                           </span>
-                          <span style={{ color: '#818CF8', fontWeight: 600 }}> from </span>
-                          <span style={{ color: '#F59E0B' }}>'./{cat.fileName}'</span>;
+                          <span className="kw-from" style={{ color: '#818CF8', fontWeight: 600 }}> from </span>
+                          <span className="kw-file" style={{ color: '#F59E0B' }}>'./{cat.fileName}'</span>;
                         </div>
 
                         {/* Copy Import Button */}
                         <button
                           onClick={() => handleCopyImport(cat.id, cat.importStatement)}
                           title="Copy import syntax"
+                          className="ide-copy-btn"
                           style={{
                             background: 'transparent',
                             border: 'none',
@@ -643,6 +654,7 @@ export default function Skills() {
                           Format: | Skill Name |
                          ============================================================ */}
                       <div 
+                        className="ide-skills-grid"
                         style={{
                           display: 'flex',
                           flexWrap: 'wrap',
@@ -654,6 +666,8 @@ export default function Skills() {
                             key={sIdx}
                             className="ide-skill-chip"
                             style={{
+                              '--chip-accent': cat.accentColor,
+                              '--chip-accent-glow': `${cat.accentColor}55`,
                               background: 'rgba(14, 19, 36, 0.45)',
                               backdropFilter: 'blur(12px)',
                               WebkitBackdropFilter: 'blur(12px)',
@@ -666,22 +680,6 @@ export default function Skills() {
                               cursor: 'default',
                               transition: 'all 0.22s cubic-bezier(0.16, 1, 0.3, 1)',
                               boxShadow: '0 4px 12px rgba(0, 0, 0, 0.25)'
-                            }}
-                            onMouseEnter={(e) => {
-                              e.currentTarget.style.borderColor = cat.accentColor;
-                              e.currentTarget.style.boxShadow = `0 0 16px -2px ${cat.accentColor}66, 0 8px 20px -4px rgba(0, 0, 0, 0.6)`;
-                              e.currentTarget.style.transform = 'translateY(-2px)';
-                              e.currentTarget.style.background = 'rgba(20, 28, 50, 0.65)';
-                              const bar = e.currentTarget.querySelector('.chip-vertical-bar');
-                              if (bar) bar.style.opacity = '1';
-                            }}
-                            onMouseLeave={(e) => {
-                              e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)';
-                              e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.25)';
-                              e.currentTarget.style.transform = 'translateY(0)';
-                              e.currentTarget.style.background = 'rgba(14, 19, 36, 0.45)';
-                              const bar = e.currentTarget.querySelector('.chip-vertical-bar');
-                              if (bar) bar.style.opacity = '0.75';
                             }}
                           >
                             {/* Vertical Accent Separator Bar "|" */}
@@ -701,6 +699,7 @@ export default function Skills() {
 
                             {/* Skill Name */}
                             <span 
+                              className="chip-name"
                               style={{
                                 fontSize: '0.88rem',
                                 fontWeight: 600,
@@ -713,6 +712,7 @@ export default function Skills() {
 
                             {/* Small Specialty Tag Pill */}
                             <span 
+                              className="chip-tag"
                               style={{
                                 fontSize: '0.68rem',
                                 color: '#94A3B8',
@@ -743,6 +743,164 @@ export default function Skills() {
       </div>
 
       <style>{`
+        /* =====================================================================
+           SKILLS IDE BASE HOVER & INTERACTION EFFECTS
+           ===================================================================== */
+        .ide-skill-chip:hover {
+          transform: translateY(-2px);
+          border-color: var(--chip-accent, #22D3EE) !important;
+          box-shadow: 0 0 16px -2px var(--chip-accent-glow, rgba(34, 211, 238, 0.4)), 0 8px 20px -4px rgba(0, 0, 0, 0.4) !important;
+          background: rgba(20, 28, 50, 0.65) !important;
+        }
+
+        .ide-skill-chip:hover .chip-vertical-bar {
+          opacity: 1 !important;
+        }
+
+        /* =====================================================================
+           LIGHT THEME OVERRIDES FOR SKILLS IDE
+           ===================================================================== */
+        :root[data-theme='light'] .ide-window {
+          background: rgba(255, 255, 255, 0.95) !important;
+          border-color: rgba(15, 23, 42, 0.1) !important;
+          box-shadow: 0 20px 50px -10px rgba(15, 23, 42, 0.08), 0 0 25px rgba(2, 132, 199, 0.06) !important;
+        }
+
+        :root[data-theme='light'] .sticky-ide-sidebar {
+          background: rgba(248, 250, 252, 0.96) !important;
+          border-right-color: rgba(15, 23, 42, 0.08) !important;
+          box-shadow: 4px 0 20px rgba(15, 23, 42, 0.04) !important;
+        }
+
+        :root[data-theme='light'] .ide-explorer-title-row {
+          border-bottom-color: rgba(15, 23, 42, 0.06) !important;
+          color: #475569 !important;
+        }
+
+        :root[data-theme='light'] .ide-file-item:not(.active):hover {
+          background: rgba(15, 23, 42, 0.04) !important;
+        }
+
+        :root[data-theme='light'] .ide-file-item.active {
+          background: rgba(2, 132, 199, 0.08) !important;
+        }
+
+        :root[data-theme='light'] .ide-file-item .file-label {
+          color: #334155 !important;
+        }
+
+        :root[data-theme='light'] .ide-file-item.active .file-label {
+          color: #0F172A !important;
+          font-weight: 700 !important;
+        }
+
+        :root[data-theme='light'] .ide-file-item .file-badge {
+          background: rgba(15, 23, 42, 0.06) !important;
+          color: #64748B !important;
+        }
+
+        :root[data-theme='light'] .ide-file-item.active .file-badge {
+          background: rgba(2, 132, 199, 0.12) !important;
+          color: #0284C7 !important;
+        }
+
+        :root[data-theme='light'] .ide-sidebar-footer {
+          background: rgba(241, 245, 249, 0.95) !important;
+          border-top-color: rgba(15, 23, 42, 0.06) !important;
+        }
+
+        :root[data-theme='light'] .ide-sidebar-footer .footer-title {
+          color: #0F172A !important;
+        }
+
+        :root[data-theme='light'] .ide-sidebar-footer .footer-filename {
+          color: #475569 !important;
+        }
+
+        :root[data-theme='light'] .ide-editor {
+          background: #FFFFFF !important;
+        }
+
+        :root[data-theme='light'] .ide-tabs-bar {
+          background: rgba(248, 250, 252, 0.98) !important;
+          border-bottom-color: rgba(15, 23, 42, 0.08) !important;
+        }
+
+        :root[data-theme='light'] .ide-tab-btn {
+          color: #64748B !important;
+          border-right-color: rgba(15, 23, 42, 0.06) !important;
+        }
+
+        :root[data-theme='light'] .ide-tab-btn:hover {
+          color: #0F172A !important;
+        }
+
+        :root[data-theme='light'] .ide-tab-btn.active {
+          background: #FFFFFF !important;
+          color: #0F172A !important;
+          border-top-width: 2px !important;
+        }
+
+        :root[data-theme='light'] .ide-category-rule {
+          background: linear-gradient(90deg, rgba(15, 23, 42, 0.1) 0%, rgba(15, 23, 42, 0.02) 100%) !important;
+        }
+
+        :root[data-theme='light'] .ide-category-filename {
+          color: #64748B !important;
+        }
+
+        :root[data-theme='light'] .ide-code-import-banner {
+          background: #F8FAFC !important;
+          border: 1px solid rgba(15, 23, 42, 0.08) !important;
+          box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03) !important;
+        }
+
+        :root[data-theme='light'] .ide-code-import-banner .code-line {
+          color: #0F172A !important;
+        }
+
+        :root[data-theme='light'] .ide-code-import-banner .kw-import {
+          color: #6366F1 !important;
+        }
+
+        :root[data-theme='light'] .ide-code-import-banner .kw-from {
+          color: #6366F1 !important;
+        }
+
+        :root[data-theme='light'] .ide-code-import-banner .kw-file {
+          color: #B45309 !important;
+        }
+
+        :root[data-theme='light'] .ide-copy-btn {
+          color: #64748B !important;
+        }
+
+        :root[data-theme='light'] .ide-copy-btn:hover {
+          color: #0284C7 !important;
+        }
+
+        :root[data-theme='light'] .ide-skill-chip {
+          background: #FFFFFF !important;
+          border-color: rgba(15, 23, 42, 0.1) !important;
+          box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04) !important;
+        }
+
+        :root[data-theme='light'] .ide-skill-chip:hover {
+          background: #FFFFFF !important;
+          border-color: var(--chip-accent, #0284C7) !important;
+          box-shadow: 0 0 16px -2px var(--chip-accent-glow, rgba(2, 132, 199, 0.25)), 0 6px 18px rgba(15, 23, 42, 0.08) !important;
+        }
+
+        :root[data-theme='light'] .ide-skill-chip .chip-name {
+          color: #0F172A !important;
+        }
+
+        :root[data-theme='light'] .ide-skill-chip .chip-tag {
+          background: rgba(15, 23, 42, 0.04) !important;
+          border-color: rgba(15, 23, 42, 0.08) !important;
+          color: #475569 !important;
+        }
+
         /* =====================================================================
            SKILLS IDE RESPONSIVE MEDIA QUERIES (TABLET & MOBILE)
            ===================================================================== */

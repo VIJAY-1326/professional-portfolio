@@ -91,7 +91,7 @@ export default function HeroPhoto3D() {
       {/* 4. Minimalist Engineering Status Bar */}
       <div className="hero-exec-status-row" aria-hidden="true">
         <span className="status-dot-pulse" />
-        <span className="status-label-code">SYSTEM // VERIFIED FULL-STACK DEVELOPER</span>
+        <span className="status-label-code">VIJAY SAI FULL-STACK DEVELOPER</span>
       </div>
     </div>
   );

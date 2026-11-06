@@ -18,10 +18,10 @@ export default function RepositoryCard({
       onClick={() => onSelect(repo)}
       style={{
         '--repo-accent': accentColor,
-        borderColor: isSelected ? accentColor : 'rgba(59, 130, 246, 0.22)',
+        borderColor: isSelected ? accentColor : undefined,
         boxShadow: isSelected 
           ? `0 0 24px -3px ${accentColor}66, inset 0 0 14px ${accentColor}18` 
-          : '0 4px 16px -4px rgba(0, 0, 0, 0.5)'
+          : undefined
       }}
       whileHover={{ x: 2, scale: 1.01 }}
       whileTap={{ scale: 0.985 }}

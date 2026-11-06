@@ -186,6 +186,7 @@ export default function GitHubTree({
             <g key={`root-${conn.branchId}`}>
               {/* Background track line */}
               <path
+                className="connector-track-line"
                 d={conn.path}
                 stroke="rgba(255, 255, 255, 0.12)"
                 strokeWidth="1.5"
@@ -206,6 +207,7 @@ export default function GitHubTree({
               {/* Moving light pulse beam along active branch */}
               {conn.isActive && (
                 <motion.path
+                  className="connector-pulse-beam"
                   d={conn.path}
                   stroke="#FFFFFF"
                   strokeWidth="2.5"
@@ -229,6 +231,7 @@ export default function GitHubTree({
             <g key={`repo-${conn.repoName}`}>
               {/* Background track line */}
               <path
+                className="connector-track-line"
                 d={conn.path}
                 stroke="rgba(255, 255, 255, 0.1)"
                 strokeWidth="1.5"
@@ -249,6 +252,7 @@ export default function GitHubTree({
               {/* Moving light pulse beam to selected repository */}
               {conn.isActive && (
                 <motion.path
+                  className="connector-pulse-beam"
                   d={conn.path}
                   stroke="#FFFFFF"
                   strokeWidth="2.5"
@@ -413,8 +417,7 @@ export default function GitHubTree({
                 className={`mobile-branch-pill ${isBranchActive ? 'is-active' : ''}`}
                 style={{
                   '--branch-accent': branch.accentColor,
-                  borderColor: isBranchActive ? branch.accentColor : 'rgba(255, 255, 255, 0.1)',
-                  color: isBranchActive ? '#FFFFFF' : '#94A3B8'
+                  borderColor: isBranchActive ? branch.accentColor : undefined
                 }}
                 onClick={() => {
                   onSelectBranch(branch);
@@ -436,7 +439,7 @@ export default function GitHubTree({
         <div className="mobile-github-repos-section">
           <div className="mobile-repos-header">
             <span className="mobile-repos-label">
-              Category: <strong style={{ color: currentActiveBranch?.accentColor || '#22D3EE' }}>{currentActiveBranch?.name || 'Repositories'}</strong>
+              Category: <strong style={{ color: currentActiveBranch?.accentColor || '#0284C7' }}>{currentActiveBranch?.name || 'Repositories'}</strong>
             </span>
             <span className="mobile-repos-count-badge">
               {currentActiveRepos.length} Repos
@@ -451,8 +454,8 @@ export default function GitHubTree({
                   key={repo.name}
                   className={`mobile-repo-card-box ${isSelected ? 'is-selected' : ''}`}
                   style={{
-                    borderColor: isSelected ? (currentActiveBranch?.accentColor || '#22D3EE') : 'rgba(255, 255, 255, 0.08)',
-                    boxShadow: isSelected ? `0 0 20px -3px ${currentActiveBranch?.accentColor || '#22D3EE'}44` : 'none'
+                    borderColor: isSelected ? (currentActiveBranch?.accentColor || '#0284C7') : undefined,
+                    boxShadow: isSelected ? `0 0 20px -3px ${currentActiveBranch?.accentColor || '#0284C7'}44` : undefined
                   }}
                   onClick={() => onSelectRepo(repo)}
                 >

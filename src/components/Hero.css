@@ -79,6 +79,12 @@
   box-shadow: 0 0 16px rgba(16, 185, 129, 0.1);
 }
 
+:root[data-theme='light'] .hero-live-beacon {
+  background: rgba(16, 185, 129, 0.08);
+  border-color: rgba(16, 185, 129, 0.35);
+  color: #059669;
+}
+
 .beacon-pulse-ring {
   position: relative;
   display: flex;
@@ -112,6 +118,10 @@
   font-weight: 700;
 }
 
+:root[data-theme='light'] .beacon-college {
+  color: #0284C7;
+}
+
 /* Signature Headline */
 .hero-signature-heading {
   display: flex;
@@ -126,6 +136,10 @@
   font-weight: 600;
   color: #94A3B8;
   letter-spacing: 0.03em;
+}
+
+:root[data-theme='light'] .heading-pre {
+  color: #64748B;
 }
 
 .heading-name-gradient {
@@ -147,6 +161,13 @@
   font-weight: 700;
   line-height: 1.25;
   background: linear-gradient(135deg, #22D3EE 0%, #818CF8 50%, #C084FC 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+:root[data-theme='light'] .heading-role {
+  background: linear-gradient(135deg, #0284C7 0%, #4F46E5 50%, #7C3AED 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;

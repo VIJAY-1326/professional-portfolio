@@ -29,8 +29,8 @@ export default function GitHubBranch({
       style={{
         '--branch-accent': branch.accentColor,
         '--branch-glow': branch.glowColor,
-        borderColor: isSelected ? branch.accentColor : 'rgba(255, 255, 255, 0.1)',
-        boxShadow: isSelected ? `0 0 25px -4px ${branch.glowColor}` : '0 4px 18px -4px rgba(0, 0, 0, 0.5)'
+        borderColor: isSelected ? branch.accentColor : undefined,
+        boxShadow: isSelected ? `0 0 25px -4px ${branch.glowColor}` : undefined
       }}
       whileHover={{ scale: 1.015, x: 2 }}
       whileTap={{ scale: 0.98 }}
