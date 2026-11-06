@@ -162,27 +162,8 @@ export default function Hero({ onOpenResumeModal }) {
           >
             {/* Visual View Mode Switcher Pill */}
             <div className="hero-visual-mode-bar" role="tablist">
-              <button
-                type="button"
-                role="tab"
-                aria-selected={visualMode === 'portrait'}
-                className={`hero-mode-pill ${visualMode === 'portrait' ? 'is-active' : ''}`}
-                onClick={() => setVisualMode('portrait')}
-              >
-                <User size={13} />
-                <span>Portrait</span>
-              </button>
-              <button
-                type="button"
-                role="tab"
-                aria-selected={visualMode === '3d'}
-                className={`hero-mode-pill ${visualMode === '3d' ? 'is-active' : ''}`}
-                onClick={() => setVisualMode('3d')}
-              >
-                <Box size={13} />
-                <span>3D Hologram</span>
-                <span className="switch-live-dot" />
-              </button>
+             
+              
             </div>
 
             {/* Display active visual component */}
